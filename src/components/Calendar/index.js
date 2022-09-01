@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import DayCard from "../DayCard";
 import EventModal from "../EventModal";
+import './index.css'
 
-const { DateTime, Info, Interval } = require("luxon");
+const { DateTime, Info } = require("luxon");
 const months = Info.months("long", { locale: "it" });
 
 export default function Calendar() {
@@ -58,21 +59,29 @@ export default function Calendar() {
     setNowDate(nowDate.plus({months: 1}));
   }
 
-  
-
   return(
-    <>
-        <h1>Calendar</h1>
-        <button onClick={goBack}><span>indietro</span></button>
-        <button onClick={goForward}><span>avanti</span></button>
-        <button></button>
-        <h2>{months[nowDate.month - 1]}</h2>
-        <div className='calendar__container'>
-          {openModal === true 
-            && <EventModal handleClose={() => setOpenModal(false)} selectedDate={selectedDate} saveEvent={saveEvent}/>
-          }
-        {getDays()}
+    <div className="calendar">
+        <h1 className="calendar-title">
+          MyCalendar <span>{months[nowDate.month - 1]}</span>
+        </h1>
+        <div className="calendar-controls">
+          <button className="calendar-control" onClick={goBack}>
+            Indietro
+          </button>
+          <button className="calendar-control" onClick={goForward}>
+            Avanti
+          </button>
         </div>
-    </>
+        <div className="calendar__container">
+          {
+            openModal && <EventModal
+              handleClose={() => setOpenModal(false)}
+              selectedDate={selectedDate}
+              saveEvent={saveEvent}
+            />
+          }
+        { getDays() }
+        </div>
+    </div>
   );
 }
