@@ -83,7 +83,7 @@ export default function EventModal({ handleClose, selectedDate, saveEvent }) {
             <option value="BugFixing">Bug fixing</option>
             <option value="Testing">Testing</option>
           </select>
-          <button class="modal-submit-button" type="submit">Salva</button>
+          <button className="modal-submit-button" type="submit">Salva</button>
         </form>
       </div>
     </div>
